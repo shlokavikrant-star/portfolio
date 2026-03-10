@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prada | Shloka Vikrant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/page-flip/dist/css/page-flip.css"/>
+  <style>
+    .editorial-flipbook{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:calc(100vh - 220px);
+    margin-top:80px;
+    margin-bottom:100px;
+    }
+
+    .flipbook-wrapper{
+    position:relative;
+    width:min(1000px, calc(100vw - 48px));
+    max-width:1000px;
+    max-height:650px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transform-style:flat;
+    }
+
+    #prada-book{
+    width:100%;
+    height:100%;
+    margin:0 auto;
+    max-width:1000px;
+    max-height:650px;
+    box-shadow:
+    0 40px 120px rgba(0,0,0,.6),
+    0 10px 30px rgba(0,0,0,.4);
+
+    transition:
+    transform .6s cubic-bezier(.22,1,.36,1),
+    box-shadow .5s ease;
+
+    transform:translateZ(0);
+    will-change:transform;
+    backface-visibility:hidden;
+    transform-style:flat;
+    cursor:none;
+    }
+
+    #prada-book:hover{
+    box-shadow:
+    0 60px 160px rgba(0,0,0,.8),
+    0 20px 40px rgba(0,0,0,.5);
+    }
+
+    #prada-book .stf__item{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#111;
+    overflow:hidden;
+    }
+
+    #prada-book img{
+    width:auto;
+    height:auto;
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    display:block;
+
+    }
+
+    #prada-book .prada-page.is-cover,
+    #prada-book .prada-page.is-back-cover{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    }
+
+    #prada-book .prada-page.is-cover img,
+    #prada-book .prada-page.is-back-cover img{
+    margin:0 auto;
+    }
+
+    .book-zone{
+    position:absolute;
+    top:0;
+    width:50%;
+    height:100%;
+    z-index:6;
+    cursor:none;
+    }
+
+    .book-zone-left{
+    left:0;
+    }
+
+    .book-zone-right{
+    right:0;
+    }
+
+    .turn-cursor{
+    position:absolute;
+    top:0;
+    left:0;
+    width:108px;
+    height:108px;
+    border:1px solid rgba(255,255,255,.85);
+    border-radius:999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#f4f4f4;
+    background:rgba(0,0,0,.28);
+    backdrop-filter:blur(4px);
+    transform:translate(-50%,-50%);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease;
+    z-index:8;
+    will-change:transform, opacity;
+    }
+
+    .turn-cursor.is-visible{
+    opacity:1;
+    }
+
+    .turn-cursor.is-left::before{
+    content:"\2190";
+    font-size:18px;
+    letter-spacing:0;
+    }
+
+    .turn-cursor.is-right::before{
+    content:"\2192";
+    font-size:18px;
+    letter-spacing:0;
+    }
+
+    .turn-cursor:not(.is-left):not(.is-right)::before{
+    content:"TURN PAGE";
+    }
+
+    .flip-hint{
+
+    position:absolute;
+    bottom:-38px;
+    left:50%;
+    transform:translateX(-50%);
+
+    font-size:11px;
+    letter-spacing:.18em;
+
+    opacity:.45;
+
+    font-family:inherit;
+
+    }
+  </style>
+</head>
+<body class="fashion-pdf-page">
+  <div class="page-wrap">
+    <header class="site-header scroll-reveal">
+      <div class="nav-left"><a class="brand-mark" href="../index.html">Shloka Vikrant</a></div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="../work.html" aria-current="page">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="social-links" aria-label="Social links">
+        <a href="https://linkedin.com/in/shloka-vikrant-1560262ab" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:hello@shlokavikrant.com">Email</a>
+      </div>
+    </header>
+
+    <main class="project-page pdf-project-layout">
+      <section class="project-info scroll-reveal">
+        <h1 class="page-title">Prada</h1>
+        <p>Archive Study FW/SS96</p>
+      </section>
+
+      <section class="scroll-reveal" aria-label="Prada Editorial Flipbook viewer">
+        <div class="editorial-flipbook">
+          <div class="flipbook-wrapper">
+            <div id="prada-book"></div>
+            <div class="book-zone book-zone-left" aria-hidden="true"></div>
+            <div class="book-zone book-zone-right" aria-hidden="true"></div>
+            <div class="turn-cursor" id="turnCursor" aria-hidden="true"></div>
+            <div class="flip-hint">CLICK OR DRAG TO TURN PAGES</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">Website designed and built by Shloka Vikrant</footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+  <audio id="pageFlipSound" preload="auto">
+    <source src="/assets/page-flip.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    const flipSound = document.getElementById("pageFlipSound");
+    const bookElement = document.getElementById("prada-book");
+    const wrapper = document.querySelector(".flipbook-wrapper");
+    const leftZone = document.querySelector(".book-zone-left");
+    const rightZone = document.querySelector(".book-zone-right");
+    const turnCursor = document.getElementById("turnCursor");
+    const FIXED_SPREAD_WIDTH = 4961;
+    const FIXED_SPREAD_HEIGHT = 3508;
+    const FIXED_PAGE_WIDTH = Math.round(FIXED_SPREAD_WIDTH / 2);
+    const FIXED_PAGE_HEIGHT = FIXED_SPREAD_HEIGHT;
+    const editorialPages = [
+    "/images/editorials/prada/prada-cover.jpg",
+    "/images/editorials/prada/prada-p2.jpg",
+    "/images/editorials/prada/prada-p3.jpg",
+    "/images/editorials/prada/prada-p4.jpg",
+    "/images/editorials/prada/prada-p5.jpg",
+    "/images/editorials/prada/prada-back.jpg"
+    ];
+
+    let pageFlip;
+    let isFlipReady = true;
+
+    const initializeFlipbook = () => {
+    const maxBookWidth = Math.max(320, Math.min(1000, window.innerWidth - 48));
+    const maxBookHeight = Math.max(240, Math.min(650, window.innerHeight - 220));
+    const spreadRatio = FIXED_SPREAD_WIDTH / FIXED_SPREAD_HEIGHT;
+    const renderedBookWidth = Math.min(maxBookWidth, maxBookHeight * spreadRatio);
+    const renderedBookHeight = renderedBookWidth / spreadRatio;
+    const renderedPageWidth = Math.round(renderedBookWidth / 2);
+    const renderedPageHeight = Math.round(renderedBookHeight);
+    wrapper.style.width = `${renderedBookWidth}px`;
+    wrapper.style.height = `${renderedBookHeight}px`;
+    bookElement.style.aspectRatio = `${FIXED_SPREAD_WIDTH} / ${FIXED_SPREAD_HEIGHT}`;
+
+    pageFlip = new St.PageFlip(
+    bookElement,
+    {
+    display:"double",
+    width:renderedPageWidth,
+    height:renderedPageHeight,
+    size:"fixed",
+    minWidth:renderedPageWidth,
+    maxWidth:renderedPageWidth,
+    minHeight:renderedPageHeight,
+    maxHeight:renderedPageHeight,
+    showCover:true,
+    usePortrait:false,
+    mobileScrollSupport:false,
+    maxShadowOpacity:0.38,
+    drawShadow:true,
+    flippingTime:900,
+    startPage:0,
+    autoSize:false
+    }
+    );
+
+    const htmlPages = editorialPages.map((src, index) => {
+    const page = document.createElement("div");
+    page.className = "prada-page";
+    if (index === 0) {
+    page.classList.add("is-cover");
+    }
+    if (index === editorialPages.length - 1) {
+    page.classList.add("is-back-cover");
+    }
+    if (index === 0 || index === editorialPages.length - 1) {
+    page.setAttribute("data-density", "hard");
+    }
+
+    const image = document.createElement("img");
+    image.src = src;
+    image.decoding = "async";
+    image.loading = index < 2 ? "eager" : "lazy";
+    image.alt = `Prada editorial page ${index + 1}`;
+    page.appendChild(image);
+    return page;
+    });
+
+    bookElement.replaceChildren(...htmlPages);
+    pageFlip.loadFromHTML(bookElement.querySelectorAll(".prada-page"));
+
+    flipSound.load();
+    pageFlip.on("flip", () => {
+    flipSound.currentTime = 0;
+    flipSound.play().catch(()=>{});
+    });
+    pageFlip.on("changeState", (event) => {
+    isFlipReady = event.data === "read";
+    });
+
+    leftZone.addEventListener("click", () => {
+    if (!isFlipReady) return;
+    isFlipReady = false;
+    pageFlip.flipPrev("top");
+    });
+
+    rightZone.addEventListener("click", () => {
+    if (!isFlipReady) return;
+    isFlipReady = false;
+    pageFlip.flipNext("top");
+    });
+    };
+
+    initializeFlipbook();
+
+    wrapper.addEventListener("mouseenter", () => {
+    turnCursor.classList.add("is-visible");
+    });
+
+    wrapper.addEventListener("mouseleave", () => {
+    turnCursor.classList.remove("is-visible", "is-left", "is-right");
+    });
+
+    let cursorFrame = null;
+    let cursorX = 0;
+    let cursorY = 0;
+    let cursorInCenter = false;
+    let cursorIsRight = false;
+
+    const renderTurnCursor = () => {
+    cursorFrame = null;
+    turnCursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+    turnCursor.classList.toggle("is-right", !cursorInCenter && cursorIsRight);
+    turnCursor.classList.toggle("is-left", !cursorInCenter && !cursorIsRight);
+    };
+
+    wrapper.addEventListener("mousemove", (event) => {
+    const bounds = wrapper.getBoundingClientRect();
+    cursorX = event.clientX - bounds.left;
+    cursorY = event.clientY - bounds.top;
+    const centerStart = bounds.width * 0.42;
+    const centerEnd = bounds.width * 0.58;
+    cursorInCenter = cursorX >= centerStart && cursorX <= centerEnd;
+    cursorIsRight = cursorX > centerEnd;
+
+    if (!cursorFrame) {
+    cursorFrame = requestAnimationFrame(renderTurnCursor);
+    }
+    });
+
+  </script>
+  <script src="../js/main.js"></script>
+  <a class="floating-back-button" id="floatingBack">
+    ← Back
+  </a>
+</body>
+</html>
