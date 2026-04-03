@@ -278,9 +278,10 @@ body.loaded .hero-content {
   inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: 0;
-  transform: scale(1.06);
-  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.42;
+  filter: blur(3px) brightness(0.62);
+  transform: scale(1.03);
+  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
 }
 
 .hero-hover-card::before {
@@ -296,8 +297,8 @@ body.loaded .hero-content {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.72));
-  opacity: 0.95;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.68));
+  opacity: 0.9;
   transition: opacity 0.35s ease;
 }
 
@@ -319,8 +320,9 @@ body.loaded .hero-content {
 
 .hero-hover-card:hover .hero-card-image,
 .hero-hover-card:focus-visible .hero-card-image {
-  opacity: 1;
-  transform: scale(1.01);
+  opacity: 0.92;
+  filter: blur(0) brightness(0.9);
+  transform: scale(1.06);
 }
 
 .hero-hover-card:hover::before,
@@ -330,7 +332,7 @@ body.loaded .hero-content {
 
 .hero-hover-card:hover::after,
 .hero-hover-card:focus-visible::after {
-  opacity: 0.58;
+  opacity: 0.5;
 }
 
 .hero-scroll-cue {
@@ -722,6 +724,86 @@ body.loaded .hero-card-grid .hero-hover-card:focus-visible {
   max-width: 780px;
   margin: 0 auto;
   text-align: left;
+}
+
+.about-copy-section {
+  margin-top: 3rem;
+  text-align: center;
+  width: 100%;
+}
+
+.about-copy-section .section-title {
+  margin-bottom: 1.5rem;
+}
+
+.about-strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.about-strength-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1.35rem 1.25rem;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  transform: translateY(0) scale(1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.about-strength-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    240px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.05) 26%,
+    rgba(255, 255, 255, 0.02) 42%,
+    transparent 72%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.about-strength-card:hover,
+.about-strength-card:focus-within {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28), 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.about-strength-card:hover::before,
+.about-strength-card:focus-within::before {
+  opacity: 1;
+}
+
+.about-strength-card h3 {
+  position: relative;
+  z-index: 1;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.65rem;
+}
+
+.about-strength-card p {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  margin: 0;
+  text-align: center;
 }
 
 .about-page main,
@@ -1276,6 +1358,19 @@ body.loaded .hero-card-grid .hero-hover-card:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .about-strengths-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-strength-card:hover,
+  .about-strength-card:focus-within {
+    transform: translateY(0) scale(1);
+  }
+
+  .about-strength-card::before {
+    opacity: 0;
+  }
+
   .hero {
     min-height: 88vh;
   }
@@ -1380,6 +1475,11 @@ body.quiet-meadow-page.loaded .qm-hero-image {
 
 .quiet-meadow-page .qm-copy.revealed p:nth-of-type(3) {
   transition-delay: 0.16s;
+}
+
+.archestyles-page .qm-copy p {
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .aether-page .aether-prototype-note {

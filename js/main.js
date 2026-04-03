@@ -290,6 +290,28 @@ const ready = () => {
     card.addEventListener("focusout", () => setPillText(defaultText));
   });
 
+  const aboutCards = document.querySelectorAll(".about-strength-card");
+  if (aboutCards.length && !reduceMotion) {
+    const coarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
+    if (!coarsePointer) {
+      aboutCards.forEach((card) => {
+        card.addEventListener("mousemove", (event) => {
+          const rect = card.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 100;
+          const y = ((event.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty("--glow-x", `${x}%`);
+          card.style.setProperty("--glow-y", `${y}%`);
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.removeProperty("--glow-x");
+          card.style.removeProperty("--glow-y");
+        });
+      });
+    }
+  }
+
   const isFineArtPage = document.body.classList.contains("fine-art-gallery-page");
   if (isFineArtPage) {
     const fineArtRows = Array.from(document.querySelectorAll(".fa-row"));
