@@ -1796,6 +1796,11 @@ body.quiet-meadow-page.loaded .qm-hero-image {
   gap: 2rem;
 }
 
+.scholarship-project-page .project-info {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
 .fashion-pdf-page .pdf-viewer-wrap {
   width: min(1020px, 100%);
   margin: 0 auto;
