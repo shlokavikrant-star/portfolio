@@ -1814,6 +1814,48 @@ body.quiet-meadow-page.loaded .qm-hero-image {
   background: #0b0b0b;
 }
 
+.fashion-pdf-page .pdf-viewer-panel {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: clamp(0.8rem, 2vw, 1.2rem);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.42);
+}
+
+.fashion-pdf-page .pdf-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.fashion-pdf-page .pdf-viewer-header p {
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.fashion-pdf-page .pdf-viewer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.fashion-pdf-page .pdf-viewer-panel .pdf-viewer-wrap {
+  width: 100%;
+  border-radius: 0.85rem;
+  box-shadow: none;
+}
+
 /* Homepage category card consistency */
 #work .project-grid {
   grid-template-columns: repeat(2, 1fr);
